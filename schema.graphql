@@ -8,21 +8,29 @@ type Approval @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
+type Delegate @entity {
+  id: ID!          # The delegate address
+  latestBalance: BigInt!  # The latest balance of the delegate
+  blockTimestamp: BigInt!
+}
+
 type DelegateChanged @entity(immutable: true) {
-  id: Bytes!
-  delegator: Bytes! # address
-  fromDelegate: Bytes! # address
-  toDelegate: Bytes! # address
+  id: ID!
+  delegator: Bytes!
+  fromDelegate: Bytes!
+  toDelegate: Bytes!
+  newBalance: BigInt
+  balanceBlockTimestamp: BigInt!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
 
 type DelegateVotesChanged @entity(immutable: true) {
-  id: Bytes!
-  delegate: Bytes! # address
-  previousBalance: BigInt! # uint256
-  newBalance: BigInt! # uint256
+  id: ID!
+  delegate: Bytes!
+  previousBalance: BigInt!
+  newBalance: BigInt!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
