@@ -7,11 +7,17 @@ type Approval @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
-
+type Account @entity {
+  id: ID!
+  balance: BigInt!
+  delegate: Bytes!
+}
 type Delegate @entity {
   id: ID!          # The delegate address
   latestBalance: BigInt!  # The latest balance of the delegate
   blockTimestamp: BigInt!
+  delegatedFromCount: BigInt! # New field to track the number of addresses that delegated to this address
+  delegators: [Bytes!]!
 }
 
 type DelegateChanged @entity(immutable: true) {
